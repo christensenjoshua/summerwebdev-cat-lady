@@ -29,6 +29,11 @@ function petCat(index){
   console.log(cat.numberOfPets)
   update(cat, index)
 }
+function unpetCat(index){
+  var cat = cats[index]
+  cat.numberOfPets = - 1
+  petCat(index)
+}
 
 function setup(){
   var catsElem = document.getElementById("cats")
@@ -45,6 +50,7 @@ function setup(){
       <h3>Current mood:</h3>
       <p id="${i + 'mood'}">${cat.mood}</p>
       <button class="btn btn-primary" onclick="petCat(${i})">Pet</button>
+      <button class="btn btn-primary" onclick="unpetCat(${i})">Un-Pet</button>
     </div>
     `
   }
