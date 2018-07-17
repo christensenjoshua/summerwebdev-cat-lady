@@ -23,23 +23,22 @@ cats.push(cat2)
 console.log(cats)
 
 
-function petCat(index){
+function petCat(index) {
   var cat = cats[index]
   cat.numberOfPets++
   console.log(cat.numberOfPets)
   update(cat, index)
 }
-function unpetCat(index){
-  var cat = cats[index]
-  cat.numberOfPets = - 1
+function unpetCat(index) {
+  cats[index].numberOfPets = -1
   petCat(index)
 }
 
-function setup(){
+function setup() {
   var catsElem = document.getElementById("cats")
   var template = ""
 
-  for(var i = 0; i < cats.length; i++){
+  for (var i = 0; i < cats.length; i++) {
     var cat = cats[i]
     template += `
     <div class="col-6">
@@ -55,20 +54,25 @@ function setup(){
     `
   }
 
-catsElem.innerHTML = template
+  catsElem.innerHTML = template
 }
 
-function update (cat, index){
+function update(cat, index) {
   document.getElementById(`${index + 'pets'}`).innerText = cat.numberOfPets
-  if (cat.numberOfPets < 10){
+  if (cat.numberOfPets < 10) {
     mood = 'happy'
-  }else if (cat.numberOfPets < 20) {
+  } else if (cat.numberOfPets < 20) {
     mood = 'meh'
-  }else{
+  } else {
     mood = 'grumpy'
   }
-  document.getElementById(`${index + 'mood'}`).innerText = mood
-  document.getElementById(`${index + 'picture'}`).src = catImages[mood]
+
+  if (mood == cat.mood) {
+
+  } else {
+    document.getElementById(`${index + 'picture'}`).src = catImages[mood]
+    document.getElementById(`${index + 'mood'}`).innerText = mood
+  }
 }
 
 setup()
