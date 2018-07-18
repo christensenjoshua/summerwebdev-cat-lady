@@ -53,6 +53,9 @@ function setup() {
   }
 
   catsElem.innerHTML = template
+  if(cats.length > 5){
+    alert('You should really think about your life decisions...\nThat is too many cats.')
+  }
 }
 
 function update(cat, index) {
