@@ -41,7 +41,7 @@ function setup() {
     template += `
     <div class="col-6">
       <h1>${cat.name}</h1>
-      <img src="${cat.imageUrl}" alt="" id="${i + 'picture'}" style="height:250px;">
+      <img src="${cat.imageUrl}" alt="" id="${i + 'picture'}" style="width:70%;">
       <h3>Number of pets:</h3>
       <p id="${i + 'pets'}">${cat.numberOfPets}</p>
       <h3>Current mood:</h3>
