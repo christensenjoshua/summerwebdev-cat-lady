@@ -1,21 +1,19 @@
-var cat1 = {
-  name: "Mr. Snibbly",
-  imageUrl: "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&h=350",
-  numberOfPets: 0,
-  mood: 'happy'
-}
-
-var cat2 = {
-  name: "Grumpy cat",
-  imageUrl: "https://pbs.twimg.com/profile_images/948294484596375552/RyGNqDEM_400x400.jpg",
-  numberOfPets: 11000,
-  mood: 'grumpy'
-}
+var moods = ['happy', 'meh', 'grumpy']
 var catImages = {
   happy: 'https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&h=350',
   meh: 'http://sixcatsonedude.com/wp-content/uploads/2015/09/sixcats-068-300x300.jpg',
   grumpy: 'https://pbs.twimg.com/profile_images/948294484596375552/RyGNqDEM_400x400.jpg',
 }
+
+function Cat(name, imageUrl){
+  this.name = name
+  this.imageUrl = imageUrl
+  this.numberOfPets = 0
+  this.mood = moods[0]
+}
+
+var cat1 = new Cat('First Kitty', catImages['happy'])
+var cat2 = new Cat('Second Kitty', catImages['happy'])
 
 var cats = []
 cats.push(cat1)
@@ -26,11 +24,11 @@ console.log(cats)
 function petCat(index) {
   var cat = cats[index]
   cat.numberOfPets++
-  console.log(cat.numberOfPets)
   update(cat, index)
 }
 function unpetCat(index) {
-  cats[index].numberOfPets = -1
+  var cat = cats[index]
+  cat.numberOfPets = -1
   petCat(index)
 }
 
@@ -59,6 +57,7 @@ function setup() {
 
 function update(cat, index) {
   document.getElementById(`${index + 'pets'}`).innerText = cat.numberOfPets
+  var mood = ''
   if (cat.numberOfPets < 10) {
     mood = 'happy'
   } else if (cat.numberOfPets < 20) {
@@ -67,9 +66,8 @@ function update(cat, index) {
     mood = 'grumpy'
   }
 
-  if (mood == cat.mood) {
-
-  } else {
+  if (mood != cat.mood) {
+    cat.mood = mood
     document.getElementById(`${index + 'picture'}`).src = catImages[mood]
     document.getElementById(`${index + 'mood'}`).innerText = mood
   }
