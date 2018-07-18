@@ -11,25 +11,25 @@ function Cat(name, imageUrl){
   this.numberOfPets = 0
   this.mood = moods[0]
 }
-
-var cat1 = new Cat('First Kitty', catImages['happy'])
-var cat2 = new Cat('Second Kitty', catImages['happy'])
-
 var cats = []
-cats.push(cat1)
-cats.push(cat2)
-console.log(cats)
-
+cats[cats.length] = new Cat('First Kitty', catImages['happy'])
+cats[cats.length] = new Cat('Second Kitty', catImages['happy'])
 
 function petCat(index) {
   var cat = cats[index]
   cat.numberOfPets++
   update(cat, index)
 }
-function unpetCat(index) {
+function giveTreat(index) {
   var cat = cats[index]
   cat.numberOfPets = -1
   petCat(index)
+  oopsNewCat()
+}
+function oopsNewCat(){
+  var oopsCat = new Cat('Accidental Cat #'+(cats.length - 1), catImages['grumpy'])
+  cats[cats.length] = oopsCat
+  setup()
 }
 
 function setup() {
@@ -41,13 +41,13 @@ function setup() {
     template += `
     <div class="col-6">
       <h1>${cat.name}</h1>
-      <img src="${cat.imageUrl}" alt="" id="${i + 'picture'}">
+      <img src="${cat.imageUrl}" alt="" id="${i + 'picture'}" style="height:250px;">
       <h3>Number of pets:</h3>
       <p id="${i + 'pets'}">${cat.numberOfPets}</p>
       <h3>Current mood:</h3>
       <p id="${i + 'mood'}">${cat.mood}</p>
       <button class="btn btn-primary" onclick="petCat(${i})">Pet</button>
-      <button class="btn btn-primary" onclick="unpetCat(${i})">Un-Pet</button>
+      <button class="btn btn-danger" onclick="giveTreat(${i})">Give Treat</button>
     </div>
     `
   }
@@ -68,6 +68,7 @@ function update(cat, index) {
 
   if (mood != cat.mood) {
     cat.mood = mood
+    cat.imageUrl = catImages[mood]
     document.getElementById(`${index + 'picture'}`).src = catImages[mood]
     document.getElementById(`${index + 'mood'}`).innerText = mood
   }
